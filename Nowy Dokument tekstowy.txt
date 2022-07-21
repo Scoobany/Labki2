@@ -1,0 +1,207 @@
+#include <iostream>
+using namespace std;
+
+
+
+int main()
+{
+	int tab[10] = { 345,3,5,34634,10,12,13,14,15,20 };
+	int schowek = tab[0];
+	for (int i = 0; i < 10; i+=2)
+	{
+		if (tab[i] > tab[i + 1])
+		{
+			schowek = tab[i];
+			tab[i] = tab[i + 1];
+			tab[i + 1] = schowek;
+			cout << " wieksza liczba to " << tab[i]<<endl;
+		}
+		else {
+			cout << " wieksza liczba to " << tab[i+1]<<endl;
+		}
+	}
+	cout << "tablica " << endl;
+	for (int i = 0; i < 10; i++)  
+	{
+		cout<< tab[i] << endl;
+	}
+
+}
+
+
+==================================
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+
+//wybranie wiekszej liczby z pary z tablicy
+// odpowiedź na pytanie dotyczące złożoności: jest to złożoność liniowa O(n)
+/*int main()
+{
+    int tab[8]{ 7, 4, 20, 10, 6, 10, 11, 2 };
+    int schowek = tab[0];
+    for (int i = 0; i < 8; i += 2) //tutaj wykonuje się petle ze skokiem równym 2, gdyż naszym zadaniem jest uporzadkowanie parami liczb
+                   // zatem wykona on się dla i = 0, 2, 4, 6
+    {
+        if (tab[i] > tab[i + 1]) // tutaj porównujemy kolejne pary liczba tab[i] z tab[i+1),  Zatem pary o indeksach (0,1), (2, 3), (4, 5) oraz (6, 7) 
+        {
+            schowek = tab[i];		// w przypadku gdy para nie jest uporządkowana zamieniami miejscami elementy np pare 7, 4 zamienimy na 4, 7/
+            tab[i] = tab[i + 1];
+            tab[i + 1] = schowek;
+        }
+    }
+    for (int i = 0; i < 8; i++)   // wyświetlenie finalnego stanu tabeli powinn być 4, 7, 10, 20, 6, 10, 2, 11
+    {
+        cout << tab[i] << endl;
+    }
+    return 0;
+}*/
+/*int main() {
+	const int n = 5, m = 10;
+	int tab2[n][m];
+
+	//wypełnianie tablicy
+	srand(time(NULL));
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++) {
+			tab2[i][j] = rand() % 100 + 1;
+			cout << tab2[i][j] << "\t";
+		}
+		cout << endl;
+	}
+	//napisz kod do wyszukiwania najmniejszej wartości w każdym wierszu
+
+
+
+	//wypisywanie elementów tablicy
+	/*for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++)
+			cout << tab2[i][j] << ' ';
+		cout << endl;
+	}
+
+	//wypisz pierwszą kolumnę tablicy
+	//cout << "Minimalne wartosci w poszczegolnych wierszach: ";
+	return 0;
+	*/
+//Sortowanie bąbelkowe
+/*
+int main()
+{
+	const int n = 8;
+	int A[n] = { 7, 4, 20, 10, 6, 10, 11, 2 };
+	for (int i = 0; i < n; i++)
+		cout << A[i] << ' ';
+	cout << endl;
+
+	for (int i = n - 1; i >= 1; i--)
+	{
+		for (int j = 0; j < i; j++)
+		{
+			if (A[j] > A[j + 1])
+			{
+				swap(A[j], A[j + 1]);
+			}
+		}
+	}
+	for (int i = 0; i < n; i++)
+		cout << A[i] << ' ';
+
+	cout << endl;
+	return 0;
+}*/
+//Sortowanie przez wstawianie
+/*
+int main()
+{
+	const int n = 20;
+	int A[n];
+
+	//wypełnianie tablicy
+
+	srand((unsigned)time(NULL));
+	for (int i = 0; i < n; i++)
+	{
+		A[i] = rand() % 100 + 1;
+		cout << A[i] << ' ';
+	}
+	cout << endl;
+
+
+
+	int element, j;
+	for (int i = 1; i < n; i++)
+	{
+		element = A[i];
+		j = i - 1;
+		while (j >= 0 && A[j] > element)//Od najmniejszej do najwiekszej
+			//(j >= 0 && A[j] < element)  od najwiekszej do najmniejszej
+		{
+			A[j + 1] = A[j];
+			j = j - 1;
+		}
+		A[j + 1] = element;
+	}
+
+	//wyswietlanie posortowanej tablicy
+	for (int i = 0; i < n; i++)
+		cout << A[i] << ' ';
+	cout << endl;
+
+	return 0;
+	//złożoność 0(n^2)
+}*/
+//Wyszukiwanie najwiekszego elementu 
+int main()
+{
+	const int n = 5;
+	float A[n];
+
+	for (int i = 0; i < n; i++)
+		cin >> A[i];
+
+	int max = 0;
+	int i = 1;
+	while (i < n)
+	{
+		if (A[i] >= A[max])
+			max = i;
+		i++;
+	}
+	cout << "pozycja maksymalnego elementu jest równa: " << max << endl;
+	cout << "wartosc maksymalnego elementu jest rowna: " << A[max] << endl;
+	//ustawianie najwiekszego el na poczatku
+	swap(A[0], A[max]);
+	for (i = 0; i < n; i++)
+	{
+		cout << A[i] << endl;
+	}
+	return 0;
+	//zlozonosc 0(n)
+}
+
+
+
+void wyszukaj(int *tab, int n)
+{
+  int najwieksza = 0, najmniejsza = 0;
+ 
+  for(int i = 1; i < n; i++)
+  {
+    if(tab[najwieksza] < tab[i])
+      najwieksza = i;
+    if(tab[najmniejsza] > tab[i])
+      najmniejsza = i;
+  }
+
+  int temp = tab[n - 1];
+  tab[n - 1] = tab[najmniejsza];
+  tab[najmniejsza] = temp;
+  temp = tab[n - 2];
+  tab[n - 2] = tab[najwieksza];
+  tab[najwieksza] = temp;
+}
